@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
+from django.core import validators
 from .models import User
 
 class UserCreationForm(forms.ModelForm):
@@ -41,9 +42,11 @@ class UserChangeForm(forms.ModelForm):
         model = User
         fields = ('email', 'password', 'phone_number', 'full_name', 'is_active', 'is_admin')
 
-
+def start_whit_0(value):
+    if value[0] != '0':
+        raise ValidationError('shuld start with 0')
 class LoginForm(forms.Form):
-    phone = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter your phone'}))
+    phone = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter your phone'}), validators=[start_whit_0,])
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
 

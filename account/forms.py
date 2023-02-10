@@ -49,11 +49,15 @@ class LoginForm(forms.Form):
     phone = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter your phone'}), validators=[start_whit_0,])
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
+class RegisterForm(forms.Form):
+    phone = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter your phone'}), validators=[start_whit_0,validators.MaxLengthValidator(11)])
+
+class CheckOtpForm(forms.Form):
+    code = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter code'}), validators=[validators.MaxLengthValidator(4),])
 
 
-
-
-
+class RegisterFinalForm(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'enter password and password save'}))
 
 
 

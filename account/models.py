@@ -41,19 +41,21 @@ class User(AbstractBaseUser):
         verbose_name='email address',
         max_length=255,
         unique=True,
+        null=True,
+        blank=True
     )
     phone_number = models.CharField(max_length=11, unique=True)
-    full_name = models.CharField(max_length=50)
+    full_name = models.CharField(max_length=50, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
     objects = UserManager()
 
     USERNAME_FIELD = 'phone_number'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['full_name']
 
     def __str__(self):
-        return self.full_name
+        return self.phone_number
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -70,3 +72,19 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+class Otp(models.Model):
+    token = models.CharField(max_length=20, unique=True, null=True, blank=True)
+    phone = models.CharField(max_length=11)
+    randomcode = models.IntegerField()
+    expertion_date =  models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.phone
+
+
+
+
+
+
+

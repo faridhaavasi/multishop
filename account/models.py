@@ -5,7 +5,7 @@ from django.contrib.auth.models import (
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, phone_number, full_name, password=None):
+    def create_user(self, phone_number, password=None):
         """
         Creates and saves a User with the given email,phone_number and full_name and password.
      """
@@ -14,14 +14,14 @@ class UserManager(BaseUserManager):
 
 
             phone_number=phone_number,
-            full_name=full_name
+
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, phone_number, full_name, password=None):
+    def create_superuser(self, phone_number, password=None):
         """
         Creates and saves a superuser with the given email, phone_number and full_name and password.
         """
@@ -29,7 +29,7 @@ class UserManager(BaseUserManager):
 
             password=password,
             phone_number=phone_number,
-            full_name=full_name,
+
         )
         user.is_admin = True
         user.save(using=self._db)
@@ -52,7 +52,7 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'phone_number'
-    REQUIRED_FIELDS = ['full_name']
+    REQUIRED_FIELDS = []
 
     def __str__(self):
         return self.phone_number

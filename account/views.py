@@ -1,7 +1,7 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, reverse
-from django.views.generic import View
-from .forms import LoginForm, RegisterForm, CheckOtpForm, RegisterFinalForm
+from django.views.generic import View, UpdateView
+from .forms import LoginForm, RegisterForm, CheckOtpForm, RegisterFinalForm, Edit_Form
 import ghasedakpack
 from random import randint
 from .models import User, Otp
@@ -89,6 +89,16 @@ class RegisterFinal(View):
         return render(request, 'account/registerfinal.html', {'form': form})
 
 
+def user_logout(request):
+    logout(request)
+    return redirect('home:home')
+
+class Edit_profile(UpdateView):
+    model = User
+    fields = ['email', 'phone_number', 'full_name']
+    #form_class = Edit_Form()
+    template_name = 'account/edit_profile.html'
+    success_url = '/'
 
 
 

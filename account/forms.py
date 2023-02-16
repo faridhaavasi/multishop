@@ -60,7 +60,10 @@ class RegisterFinalForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'enter password and password save'}))
 
 
-
+class Edit_Form(forms.Form):
+    email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter your phone'}), validators=[validators.EmailValidator(), ])
+    phone_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter your phone'}), validators=[validators.MaxLengthValidator(11), ])
+    full_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter your full_name'}))
 
 
 

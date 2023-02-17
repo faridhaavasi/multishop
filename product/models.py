@@ -25,14 +25,20 @@ class Product(models.Model):
     image = models.ImageField(upload_to='images/products')
     price = models.IntegerField()
     discount = models.SmallIntegerField()
-    color = models.ManyToManyField(Color, related_name='product', blank=True, null=True)
-    size = models.ManyToManyField(Size, related_name='product', blank=True, null=True)
+    color = models.ManyToManyField(Color, blank=True, null=True, related_name='products')
+    size = models.ManyToManyField(Size, related_name='products')
 
     def __str__(self):
         return self.title
 
 
 
+class Information(models.Model):
+    product = models.ForeignKey(Product,null=True ,on_delete=models.CASCADE, related_name='informations')
+    text = models.TextField()
+
+    def __str__(self):
+        return self.text[:30]
 
 
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Color, Size, Product, Information
+from .models import Color, Size, Product, Information, Category
 # Register your models here.
 class informationsAdmin(admin.StackedInline):
     model = Information
@@ -15,3 +15,4 @@ class productaAmin(admin.ModelAdmin):
 
 admin.site.register(Color)
 admin.site.register(Size)
+admin.site.register(Category)

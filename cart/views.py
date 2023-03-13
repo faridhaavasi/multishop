@@ -7,7 +7,7 @@ class cartdetailview(View):
         return render(request, 'cart/cartdetail.html', {})
 
 
-class addprofuct(View):
+class addproduct(View):
     def post(self, request):
         print('added product ')
         return redirect('cart:cartdetail')
